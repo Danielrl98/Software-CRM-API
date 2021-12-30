@@ -6,8 +6,8 @@ const handlebars = require('express-handlebars')
 const path = require('path')
 
 
+
 //pastas
-require('./db') // banco de dados
 require('./models/pessoas') // model de pessoas
 const router = require('./routers/Adminrouters')
 

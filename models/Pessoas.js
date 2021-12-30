@@ -2,6 +2,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
+//paginate
+var mongoosePaginate = require('mongoose-paginate');
+
 
 const Pessoa = new Schema({
 
@@ -64,7 +67,11 @@ const Pessoa = new Schema({
 
 
 })
+//paginate
+Pessoa.plugin(mongoosePaginate);
 
 mongoose.model('pessoas', Pessoa)
 
-
+.paginate({}, { page: 3, limit: 10 }, function(err, result) {
+    console.log(err,result)
+});

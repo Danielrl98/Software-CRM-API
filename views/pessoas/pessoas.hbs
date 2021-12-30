@@ -3,8 +3,71 @@
     <div class="row">
 <h1>Lista de Pessoas:</h1>
 
-<a href="pessoas/add"><button class="btn btn-success">Novo</button></a>
+<a href="/pessoas/add"><button class="btn btn-success">Novo</button></a>
 
 
 </div>
 </div>
+<div class="contain">
+<table class="table" >
+  <thead>
+    <tr>
+     
+        <th scope="col">CPF/cnpj</th>
+        <th scope="col">Last</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Celular</th>
+        <th scope="col">Endereço</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Cidade</th>
+     
+    </tr>
+  </thead>
+{{#each events}}
+  <tbody>
+    <tr>
+        <td scope="col">{{cpf_cnpj}}</td>
+        <td scope="col">{{nome}}</td>
+        <td scope="col">{{telefone}}</td>
+        <td scope="col">{{celular}}</td>
+        <td scope="col">{{endereco}} {{endereco_numero}}</td>
+        <td scope="col">{{bairro}}</td>
+        <td scope="col">{{cidade}}</td>
+      <form action="/pessoas/delete/" method="post">
+      <input type="hidden" name="id" value="{{_id}}">
+        <td><button type="submit" class="btn btn-danger">Deletar</button></td>
+    </form>
+    </tr>
+   <tr>
+      
+   </tr>
+  </tbody>
+  {{else}}
+  <br><br>
+  <h1>Sem cadastros</h1>
+  
+  {{/each}}
+  </table>
+
+{{#if events}}
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="?page={{pageback}}">Previous</a></li>
+   
+ <input type="submit" value="{{events.perPage}}" >
+
+    <li class="page-item"><a class="page-link" href="?page={{page}}">Next</a></li>
+  </ul>
+  {{/if}}
+
+
+
+
+<style>
+    td{
+max-width: 14ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  }
+</style>
+
