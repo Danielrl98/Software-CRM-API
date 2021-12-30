@@ -1,0 +1,51 @@
+<h3>Nova pessoas</h3>
+<hr>
+
+
+<div class="grid" >
+  
+  
+<form id='submit-form' action="/pessoas/nova" method="post">
+
+<a href="/pessoas/" class="btn btn-danger mt-4">Voltar</a>
+<!--1-->
+<div>
+
+<input class="form-control" type="number" id="cpfcnpj" name="cpfcnpj" placeholder="CPF ou CNPJ">
+<input class="form-control" type="text" id="nome" name="nome" placeholder="nome">
+<input class="form-control" type="number" id="cep" name="cep" placeholder="CEP">
+</div>
+<!--2-->
+<div>
+<input class="form-control" type="text" id="endereco" name="endereco" placeholder="endereco">
+<input class="form-control" type="number" id="endereco_numero" name="endereco_numero" placeholder="Numero do endereço">
+<input class="form-control" type="text" id="bairro" name="bairro" placeholder="Bairro">
+</div>
+<!--3-->
+<div>
+<input class="form-control" type="text" id="cidade" name="cidade" placeholder="cidade">
+<input class="form-control" type="number" id="telefone" name="telefone" placeholder="Telefone">
+<input class="form-control" type="number" id="celular" name="celular" placeholder="Celular">
+</div>
+<!--4-->
+<div>
+<input class="form-control" type="text" id="email" name="email" placeholder="E-mail">
+
+<textarea class="form-control" id="observacao" name="observacao" placeholder="Observação"></textarea>
+</div>
+
+
+
+
+
+<input type="submit" class="btn btn-success mt-3" value="enviar"></button>
+</form>
+</div>
+<style>
+    .form-control{width: 280px; border-left: 4px solid red;}
+    input{height: 35px;}
+   div{display:flex; }
+  input,textarea{display:flex;flex-wrap: nowrap;margin:30px;}
+  textarea{width: 480px;height: 90px;}
+   
+</style>

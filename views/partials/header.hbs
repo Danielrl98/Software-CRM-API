@@ -1,0 +1,79 @@
+
+<header>
+<nav>
+ 
+   
+<a href="/">Home</a><br><br>
+<a href="/pessoas">Pessoas</a><br><br>
+
+</nav>
+<a class="btn btn-primary"id="minin" onclick="mininBtn">></a>
+
+</header>
+
+<style>
+
+  header{
+    position: fixed;
+    height:100%;
+    width:60px;
+    background-color: black;
+    color:white;
+    left: 0;
+    top:0;
+    text-align: left;
+   padding-left:45px;
+    padding-top: 3em;
+    z-index: 9999999;}
+header #minin{
+     
+      color:white;
+      position: absolute;
+      border-radius: 50%;
+   left:10px;
+       bottom: 50px;
+
+       
+}
+nav{display:none;
+}
+nav a{color:white; text-decoration: none; 
+ 
+}
+    
+</style>
+<script>
+var minin = document.getElementById('minin')
+var nav = document.querySelector('nav')
+var header = document.querySelector('header')
+
+ function mininBtn(){
+
+
+if(header.style.width == "180px"){
+
+header.style.width = "60px"
+header.style.transition = ".3s"
+minin.style.transform = "rotate(360deg)"
+minin.style.left = "10px"
+minin.style.transition = ".3s"
+ nav.style.display = "none"
+nav.style.transition = ".16s"
+}
+else{
+
+  header.style.width = "180px"
+  header.style.transition = ".5s"
+  minin.style.transform = "rotate(180deg)"
+  minin.style.left = "70px"
+  minin.style.transition = ".3s"
+  nav.style.display = "block"
+  nav.style.transition = ".16s"
+}
+
+
+}
+minin.addEventListener('click',mininBtn)
+
+</script>
+
