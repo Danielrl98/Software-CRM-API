@@ -12,7 +12,7 @@
 <table class="table" >
   <thead>
     <tr>
-     
+        <th scope="col">Id</th>
         <th scope="col">CPF/cnpj</th>
         <th scope="col">Last</th>
         <th scope="col">Telefone</th>
@@ -26,17 +26,23 @@
 {{#each events}}
   <tbody>
     <tr>
+       <td scope="col">{{_id}}</td>
         <td scope="col">{{cpf_cnpj}}</td>
         <td scope="col">{{nome}}</td>
-        <td scope="col">{{telefone}}</td>
+        <td scope="col">{{email}}</td>
         <td scope="col">{{celular}}</td>
         <td scope="col">{{endereco}} {{endereco_numero}}</td>
         <td scope="col">{{bairro}}</td>
         <td scope="col">{{cidade}}</td>
       <form action="/pessoas/delete/" method="post">
       <input type="hidden" name="id" value="{{_id}}">
+      <td><a class="btn btn-success" href="http://localhost:5000/pessoas/{{email}}">Editar</a></td>
         <td><button type="submit" class="btn btn-danger">Deletar</button></td>
+        btn-danger">ver</a></td>
     </form>
+    
+    
+   
     </tr>
    <tr>
       
@@ -60,14 +66,4 @@
   {{/if}}
 
 
-
-
-<style>
-    td{
-max-width: 14ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  }
-</style>
 

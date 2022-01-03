@@ -17,7 +17,7 @@ router.get('/',(req,res) =>{
 })
 //mongoose
 //conexão com mongodb
-mongoose.connect('mongodb://localhost:27017/crm',()=>{
+mongoose.connect('mongodb://localhost:27017/teste',()=>{
 
 console.log('mongodb conectado')
 

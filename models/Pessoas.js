@@ -1,15 +1,9 @@
 //models de pessoas/clientes/leads
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-
-//paginate
-var mongoosePaginate = require('mongoose-paginate');
-
-
+//estrutura para envio do mongo
 const Pessoa = new Schema({
-
-
-    cpfcnpj:{
+     cpfcnpj:{
         type: Number,
         required: false
     },
@@ -42,7 +36,6 @@ const Pessoa = new Schema({
         required: false
 
     },
-    
     celular:{
         type: Number,
         required: false
@@ -63,15 +56,8 @@ const Pessoa = new Schema({
     date:{
         type: Date,
         default: Date.now()
-    }
-
-
+    },
 })
-//paginate
-Pessoa.plugin(mongoosePaginate);
-
 mongoose.model('pessoas', Pessoa)
 
-.paginate({}, { page: 3, limit: 10 }, function(err, result) {
-    console.log(err,result)
-});
+

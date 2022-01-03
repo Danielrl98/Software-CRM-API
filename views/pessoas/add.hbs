@@ -12,7 +12,7 @@
 <div>
 
 <input class="form-control" type="number" id="cpfcnpj" name="cpfcnpj" placeholder="CPF ou CNPJ">
-<input class="form-control" type="text" id="nome" name="nome" placeholder="nome">
+<input class="form-control" type="text" id="nome" name="nome" placeholder="nome" required>
 <input class="form-control" type="number" id="cep" name="cep" placeholder="CEP">
 </div>
 <!--2-->
@@ -29,7 +29,7 @@
 </div>
 <!--4-->
 <div>
-<input class="form-control" type="text" id="email" name="email" placeholder="E-mail">
+<input class="form-control" type="text" id="email" name="email" placeholder="E-mail" required>
 
 <textarea class="form-control" id="observacao" name="observacao" placeholder="Observação"></textarea>
 </div>
@@ -43,11 +43,13 @@
 </div>
 
 <style>
-  
+ 
+
     .form-control{width: 280px; border-left: 4px solid red;}
     input{height: 35px;}
    div{display:flex; }
   input,textarea{display:flex;flex-wrap: nowrap;margin:30px;}
   textarea{width: 480px;height: 90px;}
+  table{display: table;box-sizing: border-box;}
    
 </style>

@@ -1,0 +1,55 @@
+<h3>Editar pessoa</h3>
+<hr>
+
+{{events}}
+<div class="grid" >
+  
+  
+<form id='submit-form' action="/pessoas/edit" method="post">
+
+<a href="/pessoas/" class="btn btn-danger mt-4">Voltar</a>
+<!--1-->
+<div>
+<input type="hidden" name="id" value="{{pessoas._id}}">
+<input class="form-control" type="number" id="cpfcnpj" name="cpfcnpj" placeholder="CPF ou CNPJ" value="{{pessoas.cpfcnpj}}">
+<input class="form-control" type="text" id="nome" value="{{pessoas.nome}}"name="nome" placeholder="nome" required>
+<input class="form-control" type="number" id="cep" name="cep" placeholder="CEP" value="{{pessoas.cep}}">
+</div>
+<!--2-->
+<div>
+<input class="form-control" type="text" id="endereco" name="endereco" placeholder="endereco" value="{{pessoas.endereco}}">
+<input class="form-control" type="number" id="endereco_numero" name="endereco_numero" placeholder="Numero do endereço" value="{{pessoas.endereco_numero}}">
+<input class="form-control" type="text" id="bairro" name="bairro" placeholder="Bairro" value="{{pessoas.bairro}}">
+</div>
+<!--3-->
+<div>
+<input class="form-control" type="text" id="cidade" name="cidade" placeholder="cidade" value="{{pessoas.cidade}}">
+<input class="form-control" type="number" id="telefone" name="telefone" placeholder="Telefone" value="{{pessoas.telefone}}">
+<input class="form-control" type="number" id="celular" name="celular" placeholder="Celular" value="{{pessoas.celular}}">
+</div>
+<!--4-->
+<div>
+<input class="form-control" type="text" id="email" name="email" placeholder="E-mail"  value="{{pessoas.email}}" required>
+
+<textarea class="form-control" id="observacao" name="observacao" placeholder="Observação"></textarea>
+</div>
+
+
+
+
+
+<input type="submit" class="btn btn-success mt-3" value="enviar"></button>
+</form>
+</div>
+
+<style>
+ 
+
+    .form-control{width: 280px; border-left: 4px solid red;}
+    input{height: 35px;}
+   div{display:flex; }
+  input,textarea{display:flex;flex-wrap: nowrap;margin:30px;}
+  textarea{width: 480px;height: 90px;}
+  table{display: table;box-sizing: border-box;}
+   
+</style>
