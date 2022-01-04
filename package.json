@@ -10,6 +10,8 @@
     "mongoose": "^6.1.4",
     "mongoose-paginate": "^5.0.3",
     "node-fs": "^0.1.7",
+    "request": "^2.88.2",
+    "require": "^2.4.20",
     "yup": "^0.32.11"
   }
 }

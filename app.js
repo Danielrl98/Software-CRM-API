@@ -6,7 +6,16 @@ const handlebars = require('express-handlebars')
 const path = require('path')
 
 
+ //mongoose
+//conexão com mongodb
+mongoose.connect('mongodb://localhost:27017/crm',()=>{
 
+  console.log('mongodb conectado')
+  
+  }).catch((erro)=>{
+  
+  console.log(erro)
+  })
 //pastas
 require('./models/pessoas') // model de pessoas
 const router = require('./routers/Adminrouters')
@@ -14,17 +23,9 @@ const router = require('./routers/Adminrouters')
 router.get('/',(req,res) =>{
 
   res.redirect('/pessoas')
+ 
 })
-//mongoose
-//conexão com mongodb
-mongoose.connect('mongodb://localhost:27017/teste',()=>{
 
-console.log('mongodb conectado')
-
-}).catch((erro)=>{
-
-console.log(erro)
-})
 
 
 
