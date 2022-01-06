@@ -82,9 +82,38 @@ router.post('/pessoas/nova',  function(req,res){
 novaPessoa = req.body
 
 
-new Pessoa(novaPessoa).save().then(()=>{
+new Pessoa(novaPessoa).save().then((resposta)=>{
 
 res.redirect('/pessoas')
+
+var emailT = novaPessoa.email
+if(resposta){
+  console.log(novaPessoa.email)
+
+  novaPessoa.email
+
+ var Url;
+ var vid;
+  var options = { method: 'GET',
+    url: `https://api.hubapi.com/contacts/v1/contact/email/${emailT}/profile`,
+    qs: { hapikey: `${hapikey}` }}
+  
+    request(options,  function (error, response, body) {
+    if (error) throw new Error(error);
+    
+   if(body){
+    const json = JSON.parse(body)
+    
+   
+   
+   }
+   if(error){
+    res.redirect('/pessoas')
+   }
+    }
+    )}
+
+
 
 }).catch((erro)=>{
 res.redirect('/pessoas')
@@ -115,8 +144,10 @@ console.log(erro)
 
   },
   })
-.then(function (response) {
-console.log(response.data.vid)
+.then( function (response) {
+  
+   console.log(response.data.vid)
+
 
 })
 
@@ -127,6 +158,7 @@ console.log(erro)
 })
 
 router.post('/pessoas/delete',(req,res)=>{
+
 
   Pessoa.deleteMany({_id: req.body.id}).then(()=>{
 
@@ -139,14 +171,18 @@ router.post('/pessoas/delete',(req,res)=>{
     console.log(erro)
     })
 
-
+  
 })
 
 //editar postagem
+var Url = -50
+  var vid;
+  var emailT
 
-router.get('/pessoas/:email',   function (req, res){
-  
+router.get('/pessoas/:email', function (req, res){
 
+ 
+emailT = req.params.email
   Pessoa.find({email: req.params.email}).then((resposta)=>{
 
     if(resposta){
@@ -156,70 +192,78 @@ router.get('/pessoas/:email',   function (req, res){
  
   
    var options = { method: 'GET',
-     url: `https://api.hubapi.com/contacts/v1/contact/email/${req.params.email}/profile`,
+     url: `https://api.hubapi.com/contacts/v1/contact/email/${emailT}/profile`,
      qs: { hapikey: `${hapikey}` }}
    
      request(options,  function (error, response, body) {
      if (error) throw new Error(error);
      
-    if(response){
+    if(body){
      const json = JSON.parse(body)
-      console.log(json.vid)
-      var vid = Number(json.vid)
-     var Url = `https://api.hubapi.com/contacts/v1/contact/vid/${vid}?hapikey=${hapikey}`
+      vid = Number(json.vid)
      console.log(vid)
+      Url = vid
+    
+    
     }
     
-   router.post(`/pessoas/delet/`, (req,res)=>{
-   
-     function deleteHub(){
-       console.log('deletou')
-     
-        Pessoa.deleteMany({email: req.params.email}).then((resposta)=>{
-     
-     
-         console.log(resposta)
-         res.redirect('/pessoas')
-         
-         })
-         .catch((erro)=>{
-         console.log(erro)
-         res.redirect('/pessoas/edit')
-         })
-       }
-   //enviar para o hubspot
-   axios({
-     method: 'DELETE',
-         url: Url,
-   
-     
-     })
-   .then(function (response) {
-    
-       setTimeout(deleteHub,4500)
-   
-   })
-   
-   .catch((erro)=>{
-   console.log(erro)
-   res.redirect('/pessoas')
-   })
-     
-     })
        
    })
 
 
-  } else{
-
-  }
+  } 
    }).catch((erro)=>{
     console.log(erro)
   })
+  router.post(`/pessoas/delet/`,  function(req,res){
+ 
+
+   
+    //enviar para o hubspot
+    axios({
+      method: 'DELETE',
+          url: `https://api.hubapi.com/contacts/v1/contact/vid/${Url}?hapikey=${hapikey}`, 
+    
+      
+      })
+    .then(function (response) {
+     
+     console.log(response)
+     Pessoa.deleteMany({email: emailT}).then(()=>{
+
+
+      console.log('deletou')
+      res.redirect('/pessoas')
+      
+      for(Url = Url+50;Url<0;Url++){
+        console.log(Url)
+      }
+      
+      })
+      .catch((erro)=>{
+      console.log(erro)
+      res.redirect('/pessoas')
+      })
+     
+    
+    })
+    
+    .catch((erro)=>{
+      console.log(erro)
+      res.redirect('/pessoas')
+        
+       
+    })
+ 
+   
+ 
+ 
+    
+      })
   
   
 
-Pessoa.findOne({email: req.params.email}).lean().then((pessoas)=>{
+Pessoa.findOne({email: emailT}).lean().then((pessoas)=>{
     
 
   res.render('pessoas/edit',{pessoas: pessoas})
@@ -232,10 +276,10 @@ Pessoa.findOne({email: req.params.email}).lean().then((pessoas)=>{
  
  
 })
-router.post('/pessoas/edit',function(req,res){
+router.post('/pessoas/edit',async function(req,res){
 
 
-Pessoa.findOne({_id: req.body.id}).then((pessoas)=>{
+  await Pessoa.findOne({_id: req.body.id}).then((pessoas)=>{
 
   pessoas.cpfcnpj = req.body.cpfcnpj
   pessoas.nome=req.body.nome
@@ -251,7 +295,7 @@ Pessoa.findOne({_id: req.body.id}).then((pessoas)=>{
   pessoas.save().then(()=>{
     res.redirect('/')
 //enviar para o hubspot
- axios({
+  axios({
   method: 'post',
   url: `https://api.hubapi.com/contacts/v1/contact/email/${pessoas.email}/profile?hapikey=${hapikey}`,
 
@@ -283,6 +327,7 @@ Pessoa.findOne({_id: req.body.id}).then((pessoas)=>{
 
 .catch((erro)=>{
 console.log(erro)
+res.redirect('/pessoas')
 })
 
 
